@@ -5,6 +5,8 @@ const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 
+const db = require ("./models");
+
 const app = express();
 
 app.use(logger("dev"));
@@ -22,11 +24,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
 app.use(require("./routes/api_routes.js"));
 app.use(require("./routes/html_routes.js"));
 
-app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}!`);
-});
-
-
 //HTML Routes
 app.get('/stats', (req,res) => {
     res.sendFile(path.join(__dirname, '../public/stats.html'));
@@ -38,4 +35,33 @@ app.get('/exercise', (req,res) => {
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname + "/public/index.html"));
+  });
+
+//API Routes 
+
+app.post("/api/workouts", ({body}, res) => {
+    db.Workout.create(body)
+    .then(workouts => res.json(workouts))
+});
+
+app.get("/api/workouts/range", (req, res) => {
+    db.Workout.find()
+        .then(workouts => res.json(workouts))
+        .catch(err => res.json(err))
+});
+
+app.get("/api/workouts", (req, res) => {
+    db.Workout.find()
+    .then(workouts => res.json(workouts))
+    .catch(err => res.json(err))
+});
+
+app.put("/api/workouts/:id", (req, res) => {
+    db.Workout.findByIdAndUpdate(req.params.id, { $push: {exercises: req.body}})
+    .then(workouts => res.json(workouts))
+    .catch(err=> res.json(err))
+});
+
+app.listen(PORT, () => {
+    console.log(`App running on port ${PORT}!`);
   });
