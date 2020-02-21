@@ -1,6 +1,7 @@
 const express = require ("express");
 const logger = require('morgan');
 const mongoose = require("mongoose");
+const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 
@@ -24,3 +25,17 @@ app.use(require("./routes/html_routes.js"));
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });
+
+
+//HTML Routes
+app.get('/stats', (req,res) => {
+    res.sendFile(path.join(__dirname, '../public/stats.html'));
+});
+
+app.get('/exercise', (req,res) => {
+    res.sendFile(path.join(__direname, '../public/exercise.html'));
+});
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname + "/public/index.html"));
+  });
