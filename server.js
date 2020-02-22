@@ -21,20 +21,17 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
   useFindAndModify: false
 });
 
-app.use(require("./routes/api_routes.js"));
-app.use(require("./routes/html_routes.js"));
-
 //HTML Routes
 app.get('/stats', (req,res) => {
-    res.sendFile(path.join(__dirname, '../public/stats.html'));
+    res.sendFile(path.join(__dirname, '/public/stats.html'));
 });
 
 app.get('/exercise', (req,res) => {
-    res.sendFile(path.join(__direname, '../public/exercise.html'));
+    res.sendFile(path.join(__dirname, '/public/exercise.html'));
 });
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname + "/public/index.html"));
+    res.sendFile(path.join(__dirname + '/public/index.html'));
   });
 
 //API Routes 
@@ -57,7 +54,9 @@ app.get("/api/workouts", (req, res) => {
 });
 
 app.put("/api/workouts/:id", (req, res) => {
-    db.Workout.findByIdAndUpdate(req.params.id, { $push: {exercises: req.body}})
+    db.Workout.findByIdAndUpdate(req.params.id, { 
+        $push: {exercises: req.body}
+    })
     .then(workouts => res.json(workouts))
     .catch(err=> res.json(err))
 });
