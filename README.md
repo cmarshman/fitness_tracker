@@ -1,13 +1,8 @@
 # fitness_tracker
 
 ## Installation 
-No installation required. Simply visit [fitness_tracker](https://aqueous-lowlands-63673.herokuapp.com/?id=5e514089c41d790017f05df4) and get started. 
+Simply visit [fitness_tracker](https://aqueous-lowlands-63673.herokuapp.com/?id=5e514089c41d790017f05df4) and get started. 
 
-## Purpose
-This application helps the user log their workout based on type of workout, Resistance or Cardio. The user can then input the workout details and have them logged into the fitness tracker. The ui then desplays the users fitness statistic 
-
-## Functionality 
-Using MongoDB, and mLab, the user's input is logged and tracked so they can view their workout statistics over time
 
 ## Purpose
 This application helps the user log their workout based on type of workout, Resistance or Cardio. The user can then input the workout details and have them logged into the fitness tracker. The ui then displays the user’s fitness statistic 
